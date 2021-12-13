@@ -5,7 +5,7 @@
 #SBATCH --mail-user=ytpan@umich.edu
 #SBATCH --mail-type=ALL
 #SBATCH --nodes=1
-#SBATCH --mem=32G
+#SBATCH --mem=128G
 #SBATCH --cpus-per-task=40
 
 SCRATCH_DIRECTORY=/home/ytpan/slurm/${SLURM_JOBID}
