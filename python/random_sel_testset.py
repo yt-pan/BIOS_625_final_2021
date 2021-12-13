@@ -18,7 +18,7 @@ def sel_testset():
                 if row[0] == 'Year':
                     writer.writerow(row)
                 else:
-                    if k<=0.001:
+                    if k<=0.1:
                         writer.writerow(row)           
 
 
