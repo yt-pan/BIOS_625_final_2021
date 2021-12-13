@@ -25,7 +25,7 @@ def selectSubarray( arr, elval, frac ):
 
 if __name__ == '__main__':
     np.random.seed(1000)   
-    df0 = pd.read_table("C:\\Users\\panyt\\Documents\\GitHub\\BIOS_625_final_2021\\testset\\test.csv",sep=',', header=0)
+    df0 = pd.read_table("C:\\Users\\panyt\\Documents\\GitHub\\BIOS_625_final_2021\\testset\\debug.csv",sep=',', header=0)
     Var = ["Year","Month","DayofMonth","DayOfWeek","CRSDepTime","CRSArrTime","UniqueCarrier", "Origin","Dest","Distance","depdelayC"]
     df1 = df0[Var]
     df2 = pd.get_dummies(df1, drop_first=False,columns=["Year","Month","DayofMonth","DayOfWeek","UniqueCarrier", "Origin","Dest"])
@@ -44,10 +44,7 @@ if __name__ == '__main__':
       %(len(y_train),len(y_test),len(Y0),float(len(y_test))/len(Y0)))
     
 
-    Ycol = ["red"]
-    Ncol = ["green"]
-
-    parameter_grid = [{'n_estimators': [400, 600], 'max_depth': [40, 60], 
+    parameter_grid = [{'n_estimators': [400], 'max_depth': [40], 
                     'min_samples_leaf': [3]}]
 
     # Start the grid search
