@@ -7,8 +7,8 @@ INPATH = 'C:\\Users\\panyt\\OneDrive\\Coursework\\BIOS_625\\final\\cleaned_var_c
 OUTPATH = 'E:\\BIOS625final\\add_catdelay_csv\\'
 
 def sel_testset():
-    f_in = OUTPATH + '03-08.csv'
-    f_out = OUTPATH + 'test.csv'
+    f_in = 'D:\\' + '03-08.csv'
+    f_out = 'D:\\' + 'debug.csv'
     with open(f_out, 'w', newline='', encoding='utf-8') as opfile:
         writer = csv.writer(opfile)
         with open(f_in, 'r', newline='', encoding='utf-8') as csvfile:
@@ -18,7 +18,7 @@ def sel_testset():
                 if row[0] == 'Year':
                     writer.writerow(row)
                 else:
-                    if k<=0.1:
+                    if k<=0.001:
                         writer.writerow(row)           
 
 

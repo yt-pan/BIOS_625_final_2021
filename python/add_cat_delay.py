@@ -4,11 +4,11 @@ import csv
 import os
 
 INPATH = 'C:\\Users\\panyt\\OneDrive\\Coursework\\BIOS_625\\final\\cleaned_var_csv\\'
-OUTPATH = 'C:\\Users\\panyt\\OneDrive\\Coursework\\BIOS_625\\final\\add_catdelay_csv\\'
+OUTPATH = 'E:\\BIOS625final\\add_catdelay_csv\\'
 
 
 def add_cat_delay():
-    csv_files = os.listdir(INPATH)
+    csv_files = ["2003.csv", "2004.csv", "2005.csv", "2006.csv", "2007.csv", "2008.csv"]
     i = 0
     for csv_file in csv_files:
         i += 1
@@ -23,18 +23,16 @@ def add_cat_delay():
                     if row[0] == 'Year':
                         writer.writerow(row + ['depdelayC'])
                     else:
-                        if int(row[9]) <= 5:
+                        if int(row[9]) <= 15:
                             writer.writerow(row + ['0'])
-                        elif int(row[9]) <= 30:
+                        else:
                             writer.writerow(row + ['1'])
-                        elif int(row[9]) > 30:
-                            writer.writerow(row + ['2'])
 
 
 def merge():
     csv_files = ["2003.csv", "2004.csv", "2005.csv", "2006.csv", "2007.csv", "2008.csv"]
     i = 0
-    f_out = OUTPATH + '03-08.csv'
+    f_out ='D:\\' + '03-08.csv'
     allre = 0
     with open(f_out, 'w', newline='', encoding='utf-8') as opfile:
         writer = csv.writer(opfile)
@@ -56,4 +54,5 @@ def merge():
 
 
 if __name__ == '__main__':
+#    add_cat_delay()
     merge()
