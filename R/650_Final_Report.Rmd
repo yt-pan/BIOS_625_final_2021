@@ -1,0 +1,50 @@
+---
+title: "Final Report for Biostat 625"
+author: "Group 3"
+date: "12/17/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Introduction
+
+## Data Preproccesing
+
+## Methods
+
+### Random Forest
+Random Forests are an ensemble learning method for classification by constructing a multitude of decision trees at training time. Compared to original bagging method for decision trees which repeatedly select random samples from training set, random forest take the procedure of feature bagging. It selects a random subset of the features at each split in the learning process. It successfully fixes overfitting problem in decision tree model and generate variable importance automatically but it’s still a black box model lack of interpretation. We fit Random Forest Classification model on selected 10 variables to predict delay status. Parameters in the models are selected via 5-fold cross validation. Weights are added to solve imbalance problem between delay and undelay flights.
+
+### Gradient Boosting Decision Tree
+Gradient boosting combines weak learner such as decision tree to strong learner by iteration. In GBDT, it aims to minimize the loss function by applying steepest descent to this minimization problem in each iteration of decision tree. Comparing to Random Forest, it has better performance in terms of generalization and precision accuracy. However, GBDT is more sensitive to outliers. Learning rate and number of estimators are two important parameters to adjust generalizability and overfitting problem. In our model, we set learning rate to be 0.8 and number of estimators to be 200. All parameters in the models are selected via 5-fold cross validation.
+
+## Results
+
+### Feature Importances
+Our random forest and GBDT classifier uses a total of 733 features(coverting every categorical features to binary one-hot coding).In order to find out which feature has the most impact on predict results, we use the feature importances plot.  
+
+From the plot above, we can see that, the most important features for both model is Departure time and Arriving time, month, year, and distance. Combined with the descriptive analysis above, we can know that flights between afternoon and midnight have a higher probability of being delayed, and flights at dinner time have the highest chance of being delayed. Also, flights have higher delays from June to August and with Christmas holidays. As well, it is best to avoid Chicago ORD airport, which has a high importance in both models, if you want your flights to be on time.   
+
+### Classifier performence
+We want to be able to visualize how the classifier scores against delay or no delay, so we plotted the histogram of the classifier scores.  
+
+The histograms for RF model are centered around 50% because we set the parameter “class_weight” to “balanced_subsample”. The scikit-learn GBDT implement cannot directly get balanced sample, so the histogram centered around 0.2 which is the fraction of positive(delay) in the dataset.  
+
+Here is the overall precision and recall vs threshold plot.  
+
+Finally we want to show the Receiver Operating Characteristic(ROC) plot. The ROC curve is a curve that measures the diagnostic ability(True postitive and False Positive) when the threshold limit is changing.  
+
+The area under the ROC curve is a good estimator for model performance. That area of Random Forest model is 0.708 and 0.754 for GBDT model.  
+
+## Conclusion and Discussion
+
+In this project we download the flight dataset from Expo2009 website. We select the data from the year 2003 to 2008 and use several models to find features that can predict flight delay. We trained a Random Forest model and GBDT model to predict whether a flight will be delayed or not, using 10 features from the dataset. We only got an accuracy of 61%(RF) and 63%(GBDT) in the test dataset and a ROC score of around 0.73.  
+
+There are several limitations in our project.  
+1. Most of the characteristics in the dataset are relatively static, and there is a comparative lack of dynamic information such as weather, which has a relatively large impact on flight delays, and introducing this information from other data sources in the model may improve the accuracy of our model.  
+
+2. Even with cluster computing and parallel computing, our dataset is still very large, making it very difficult to reconcile the model. This may lead to overfitting problems and make the model less accurate in the test set.  
+
