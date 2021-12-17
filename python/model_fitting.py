@@ -63,7 +63,7 @@ if __name__ == '__main__':
                                                 max_features="auto", max_leaf_nodes=None, bootstrap=True,
                                                 oob_score=True, verbose=0, warm_start=False, random_state=0,
                                                 n_jobs=-1, class_weight="balanced_subsample",
-                                                n_estimators=clf1.best_estimator_["n_estimators"]), 
+                                                n_estimators=clf1.best_estimator_[0]), 
                         parameter_grid, refit=True, cv=5, scoring='roc_auc')
     clf2.fit(X_train, y_train)
 
@@ -84,8 +84,8 @@ if __name__ == '__main__':
                                                 max_features="auto", max_leaf_nodes=None, bootstrap=True,
                                                 oob_score=True, verbose=0, warm_start=False, random_state=0,
                                                 n_jobs=-1, class_weight="balanced_subsample",
-                                                n_estimators=clf1.best_estimator_["n_estimators"],
-                                                max_depth=clf2.best_estimator_["max_depth"]), 
+                                                n_estimators=clf1.best_estimator_[0],
+                                                max_depth=clf2.best_estimator_[0]), 
                         parameter_grid, refit=True, cv=5, scoring='roc_auc')
     clf3.fit(X_train, y_train)
 

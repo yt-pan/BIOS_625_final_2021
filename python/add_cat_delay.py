@@ -30,9 +30,9 @@ def add_cat_delay():
 
 
 def merge():
-    csv_files = ["2003.csv", "2004.csv", "2005.csv", "2006.csv", "2007.csv", "2008.csv"]
+    csv_files = ["2006.csv", "2007.csv", "2008.csv"]
     i = 0
-    f_out ='D:\\' + '03-08.csv'
+    f_out ='D:\\' + '06-08.csv'
     allre = 0
     with open(f_out, 'w', newline='', encoding='utf-8') as opfile:
         writer = csv.writer(opfile)
