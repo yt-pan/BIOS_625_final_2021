@@ -1,8 +1,7 @@
 ---
-title: "Final Report for Biostat 625"
-subtitle: "Airline on-time performance"
+title: "Airline on-time performance"
+subtitle: "Final Report for Biostat 625"
 author: "Group 3"
-date: "12/17/2021"
 output: pdf_document
 ---
 
@@ -12,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1 Introduction
 
-With air traffic restrictions and the rapid increase in the number of flights, flight delays are becoming more frequent and has become is a critical issue to airlines and customers associated with significant costs to the society. High costs of delay motivate scientists to analyze the manner of delay and use models to predict delay time. Flight delay can be driven by many factors; weather, distance, carriers, security, origin airports, etc. Previous studies have studied the propagation of delays, estimated distributions of the flight departure delay, and impacts of delays on passengers. Here we use the public data of all commercial flights within the USA from 2003 to 2008 with flight arrival and departure details from expo2009, to investigate the prediction of departure time, with consideration of roles of departure time, arrival time, origin airports, carrier and other related covariates contributing to flight delay. We use random forest method and Gradient Boosted Decision Trees(GBDT) method to predict flight delay and find the association between flight delay and interested factors within our data set. 
+With air traffic restrictions and the rapid increase in the number of flights, flight delays are becoming more frequent and has become a critical issue to airlines and customers associated with significant costs to the society. High costs of delay motivate scientists to analyze the manner of delay and use models to predict delay time. Flight delay can be driven by many factors; weather, distance, carriers, security, origin airports, etc. Previous studies have studied the propagation of delays, estimated distributions of the flight departure delay, and impacts of delays on passengers. Here we use the public data of all commercial flights within the USA from 2003 to 2008 with flight arrival and departure details from expo2009, to investigate the prediction of departure time, with consideration of roles of departure time, arrival time, origin airports, carrier and other related covariates contributing to flight delay. We use random forest method and Gradient Boosted Decision Trees(GBDT) method to predict flight delay and find the association between flight delay and interested factors within our data set. 
 
 ## 2 Computational Challenge and Data Preproccesing
 
@@ -107,20 +106,15 @@ There are several limitations in our project.
 
 2. Even with cluster computing and parallel computing, our data set is still very large, making it very difficult to reconcile the model. This may lead to over fitting problems and make the model less accurate in the test set.  
 
+**Github repository**: https://github.com/yt-pan/BIOS_625_final_2021
+
 ## Reference
 
 [1] Data Expo 2009 - Airline on-time performance (https://community.amstat.org/jointscsg-section/dataexpo/dataexpo2009)  
-
 [2] Pedregosa, Fabian, et al. "Scikit-learn: Machine learning in Python." the Journal of machine Learning research 12 (2011): 2825-2830.  
-
 [3] Liaw, Andy, and Matthew Wiener. "Classification and regression by randomForest." R news 2.3 (2002): 18-22.  
-
 [4] Zonglei, Lu, Wang Jiandong, and Zheng Guansheng. "A new method to alarm large scale of flights delay based on machine learning." 2008 International Symposium on Knowledge Acquisition and Modeling. IEEE, 2008.  
-
 [5] Ball, Michael, et al. "Total delay impact study." NEXTOR Research Symposium, Washington DC. 2010.  
-
 [6] Rebollo, Juan Jose, and Hamsa Balakrishnan. "Characterization and prediction of air traffic delays." Transportation research part C: Emerging technologies 44 (2014): 231-241.  
-
 [7] Yazdi, Maryam Farshchian, et al. "Flight delay prediction based on deep learning and Levenberg-Marquart algorithm." Journal of Big Data 7.1 (2020): 1-28.  
-
 [8] Xu, Ning, et al. "Estimation of delay propagation in the national aviation system using Bayesian networks." 6th USA/Europe Air Traffic Management Research and Development Seminar. FAA and Eurocontrol Baltimore, 2005.
