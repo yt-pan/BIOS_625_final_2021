@@ -7,6 +7,6 @@ In this project, we try to use several models to predicted aircraft delays and l
 Group members: Junyan Dong, Yutong Pan, Ruiwen Zhou.
 
 Contributions: 
-  Junyan Dong:  Literature review, building model, writing final report
-  Yutong Pan:   EDA, conducting descriptive analysis, implementing model, writing final report
-  Ruiwen Zhou:  Conducting preliminary data analysis, building model, writing final report
++ Junyan Dong:  Literature review, building model, writing final report
++ Yutong Pan:   EDA, conducting descriptive analysis, implementing model, writing final report
++ Ruiwen Zhou:  Conducting preliminary data analysis, building model, writing final report
