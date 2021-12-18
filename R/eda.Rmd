@@ -1,0 +1,199 @@
+---
+title: "Bios625 fp eda"
+author: "Yutong Pan"
+date: "2021/12/3"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r}
+library(ggplot2)
+library(ggrepel)
+library(forcats)
+library(scales)
+library(tidyr)
+library(hrbrthemes)
+library(viridis)
+library(ggstatsplot)
+library(tidyverse)
+library(ggpubr)
+setwd("C:/Users/panyt/OneDrive/Coursework/BIOS_625/final")
+```
+
+```{r}
+data2008 <- read.table('2008.csv',header=TRUE,sep=',',encoding = "UTF_8")
+```
+
+```{r cars}
+colnames(data2008)
+#sub0 = data2008[,c("Month","DayofMonth","DayOfWeek","CRSDepTime",
+#                   "CRSArrTime","CRSElapsedTime",
+#                   "ArrDelay","DepDelay","Distance")]
+#psych::pairs.panels(sub0)
+sub1 = data2008[,c("Month","DayofMonth","DayOfWeek","DepTime","CRSDepTime",
+                   "ArrTime","CRSArrTime","UniqueCarrier","ActualElapsedTime","CRSElapsedTime",
+                   "ArrDelay","DepDelay","Origin","Dest","Distance")]
+```
+
+
+```{r}
+data  = as.data.frame(table(sub1$UniqueCarrier)) 
+
+## Compute the position of labels
+#data <- data %>% 
+#  arrange(desc(Var1)) %>%
+#  mutate(prop = Freq / sum(data$Freq) *100) %>%
+#  mutate(ypos = cumsum(prop)- 0.5*prop )
+#
+## Basic piechart
+#ggplot(data, aes(x="", y=prop, fill=Var1)) +
+#  geom_bar(stat="identity", width=1, color="white") +
+#  coord_polar("y", start=0) +
+#  theme_void() + 
+#  theme(legend.position="none") +
+#  
+#  geom_text(aes(y = ypos, label = Var1), color = "white", size=6) +
+#  scale_fill_brewer(palette="Set1")
+```
+
+```{r}
+data  = as.data.frame(table(sub1$UniqueCarrier)) 
+data$Group = paste0(data$Var1, " ", round(data$Freq / sum(data$Freq) * 100, 1), "%")
+ggplot(data, aes(x="", y=Freq, fill=Group)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) +
+  labs(title ="% of flight per Company") +
+  theme_void() # remove background, grid, numeric labels
+```
+
+```{r}
+sub = sub1[which(sub1$DepDelay>0),]
+data  = as.data.frame(table(sub$UniqueCarrier)) 
+data$Group = paste0(data$Var1, " ", round(data$Freq / sum(data$Freq) * 100, 1), "%")
+ggplot(data, aes(x="", y=Freq, fill=Group)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) +
+  labs(title ="% of flight delayed at departure per Company") +
+  theme_void() # remove background, grid, numeric labels
+```
+
+```{r}
+sub = sub1[which(sub1$ArrDelay>0),]
+data  = as.data.frame(table(sub$UniqueCarrier)) 
+data$Group = paste0(data$Var1, " ", round(data$Freq / sum(data$Freq) * 100, 1), "%")
+ggplot(data, aes(x="", y=Freq, fill=Group)) +
+  geom_bar(stat="identity", width=1, color="white") +
+  coord_polar("y", start=0) +
+  labs(title ="% of flight delayed at arrival per Company") +
+  theme_void() # remove background, grid, numeric labels
+```
+
+```{r}
+sub2 = sub1[which(sub1$DepDelay > 0),]
+data  = sub1
+#ggplot(data, aes(x=UniqueCarrier, y=DepDelay, fill=UniqueCarrier, color=UniqueCarrier)) +
+#  geom_violin(width=2.1, size=0.2) +
+#  scale_fill_viridis(discrete=TRUE) +
+#  scale_color_viridis(discrete=TRUE) +
+#  theme_ipsum() +
+#  theme(
+#    legend.position="none"
+#  ) +
+#  coord_flip() + # This switch X and Y axis and allows to get the horizontal version
+#  xlab("") +
+#  ylab("Deperture Delayed Time (minutes)")
+#
+
+ggplot( data, aes(x=UniqueCarrier, y=DepDelay, fill=UniqueCarrier, color=UniqueCarrier)) +
+  geom_boxplot() +
+  geom_violin() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  xlab("")+
+  coord_flip() +
+  ylab("Deperture Delayed Time (minutes)")
+
+
+# coord_cartesian(xlim = c(5, 7), ylim = c(2.5, 4))
+
+```
+
+```{r}
+#ggbetweenstats(
+#  data = data,
+#  x = UniqueCarrier,
+#  y = DepDelay
+#) +
+#  coord_flip() +
+#  ylab("Deperture Delayed Time (minutes)") +
+#  coord_cartesian(ylim = c(-10, 100))
+
+data  = sub2
+ggplot( data, aes(x=UniqueCarrier, y=DepDelay, fill=UniqueCarrier, color=UniqueCarrier)) +
+  geom_boxplot() +
+  geom_violin() +
+  scale_fill_viridis(discrete = TRUE, alpha=0.6) +
+  theme_ipsum() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(size=11)
+  ) +
+  xlab("")+
+  coord_flip() +
+  ylab("Deperture Delayed Time (minutes)")+
+  coord_cartesian(ylim = c(0, 100))
+
+
+```
+
+```{r}
+ggplot(data = sub1, aes(x=DepDelay))+
+  geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8)+
+  theme_ipsum()+
+  scale_x_continuous(limits = c(-12.5, 100))
+
+ggplot(data = sub1, aes(x=DepDelay))+
+  geom_density(fill="#69b3a2", color="#e9ecef", alpha=0.8)+
+  theme_ipsum()+
+  scale_x_continuous(limits = c(0, 100))
+```
+
+```{r}
+sub2 = sub1[which(sub1$DepDelay >= 0),]
+Carrier = as.character(as.data.frame(table(sub2$UniqueCarrier))[,1])
+cof = matrix(0,length(Carrier),2)
+p = vector()
+for (i in 1:length(Carrier)){
+  data = as.data.frame(table(sub2[which(sub2$UniqueCarrier==Carrier[i]),]$DepDelay))
+  data$value = data$Freq / sum(data$Freq)
+  data$delay = as.numeric(as.character(data$Var1))
+  m = lm(log(data$value) ~ data$delay)
+  cof[i,] = coef(m)
+  data$predlm = exp(predict(m))
+  plot(data$delay,data$value,pch=16 , cex=0.1,xlim=c(0,500),ylim=c(0,0.05), xlab = 'delay time', ylab = 'normalised portion')
+  lines(data$delay, data$predlm)  
+  title(paste(Carrier[i],' Normalised delayed flight'))
+  text(300,0.04, paste("a=",round(exp(cof[i,1]),4)))
+  text(300,0.035, paste("b=",round(-1/cof[i,2],4)))
+}
+
+a = exp(cof[,1])
+b = -1/cof[,2]
+carr_cof = as.data.frame(cbind(a,b))
+
+rownames(carr_cof) = Carrier
+ggplot(carr_cof, aes(x=b, y=a)) +
+  geom_point() + # Show dots
+  geom_text(
+    label=rownames(carr_cof), 
+    nudge_x = 5, nudge_y = 0.0002, 
+    check_overlap = F +
+    theme_void()
+  )
+
+```
